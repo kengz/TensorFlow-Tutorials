@@ -1,3 +1,5 @@
+# source url: http://www.tensorflow.org/get_started/basic_usage.md#the-computation-graph
+
 import tensorflow as tf
 import numpy as np
 
@@ -27,7 +29,7 @@ import numpy as np
 
 
 
-# Simple graph
+# Simple graph: below are 3 nodes
 # mat1 = tf.constant([[3., 3.]])
 # mat2 = tf.constant([[2.], [2.]])
 # prod = tf.matmul(mat1, mat2)
@@ -38,18 +40,82 @@ import numpy as np
 
 # sess.close()
 
-
+# alternative way to run
 # with tf.Session() as sess:
 # 	res = sess.run(prod)
 # 	print res
 
-
 # sess.close()
-with tf.Session(config=tf.ConfigProto(log_device_placement=True)) as sess:
-	with tf.device("/cpu:0"):
-		mat1 = tf.constant([[3., 3.]])
-		mat2 = tf.constant([[2.], [2.]])
-		prod = tf.matmul(mat1, mat2)
-		res = sess.run(prod)
-		print res
 
+# or specify device, log it
+# with tf.Session(config=tf.ConfigProto(log_device_placement=True)) as sess:
+# 	with tf.device("/cpu:0"):
+# 		mat1 = tf.constant([[3., 3.]])
+# 		mat2 = tf.constant([[2.], [2.]])
+# 		prod = tf.matmul(mat1, mat2)
+# 		res = sess.run(prod)
+# 		print res
+
+
+
+
+# InteractiveSession = so don't have to build ur own comp graph
+# then u can use Tensor.evel() and Operation.run()
+# sess = tf.InteractiveSession()
+
+# x = tf.Variable([1.0, 2.0])
+# a = tf.constant([3.0, 3.0])
+
+# # initialize x
+# x.initializer.run()
+# # add op node, subtraction
+# sub = tf.sub(x, a)
+# print sub.eval()
+
+
+# Variables
+# create a var init to val 0
+# var = tf.Variable(0, name="counter")
+# # create an Op to add 1 to var
+# one = tf.constant(1)
+# new_value = tf.add(var, one)
+# update = tf.assign(var, new_value)
+
+# # launch the graph. add the init op first
+# init_op = tf.initialize_all_variables()
+
+# # launch the graph n run the ops
+# with tf.Session() as sess:
+# 	sess.run(init_op)
+# 	print sess.run(var)
+# 	for _ in range(3):
+# 		sess.run(update)
+# 		print sess.run(var)
+
+
+
+# Fetches
+# To fetch the outputs of operations, execute the graph with a run() call on the Session object and pass in the tensors to retrieve. In the previous example we fetched the single node var, but you can also fetch multiple tensors:
+
+# input1 = tf.constant(3.0)
+# input2 = tf.constant(2.0)
+# input3 = tf.constant(5.0)
+# intermed = tf.add(input2, input3)
+# mul = tf.mul(input1, intermed)
+
+# with tf.Session() as sess:
+# 	# pass in the tensors to retrieve
+# 	res = sess.run([mul, intermed])
+# 	print res
+
+
+
+
+# Feeds to placeholder()
+# replaces input node with external feed
+# input1 = tf.placeholder(tf.types.float32)
+# input2 = tf.placeholder(tf.types.float32)
+# output = tf.mul(input1, input2)
+
+# with tf.Session() as sess:
+# 	print sess.run([output], feed_dict={input1:[7.], input2:[2.]})

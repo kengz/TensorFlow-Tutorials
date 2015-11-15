@@ -1,5 +1,9 @@
-TensorFlowTutorials
-================
+# TensorFlowTutorials
+
+## Additions in this repo
+Going through the tutorials at tensorflow.org, correcting some types with implementation.
+
+## Original notes by nlintz
 
 Introduction to deep learning based on Google's TensorFlow framework. These tutorials are direct ports of
 Newmu's [Theano Tutorials](https://github.com/Newmu/Theano-Tutorials)
