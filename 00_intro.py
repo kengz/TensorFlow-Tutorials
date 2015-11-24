@@ -2,6 +2,7 @@
 
 import tensorflow as tf
 import numpy as np
+import os
 
 # x_data = np.float32(np.random.rand(2,10))
 # y_data = np.dot([0.100, 0.200], x_data) + 0.300
@@ -119,3 +120,44 @@ import numpy as np
 
 # with tf.Session() as sess:
 # 	print sess.run([output], feed_dict={input1:[7.], input2:[2.]})
+
+
+
+
+
+# # Saving Variables
+# note by default saves all Variables,
+# u can sepcify some subset by e.g.: saver = tf.train.Saver({"my_v2": v2})
+# mat1 = tf.Variable([[2., 3.]], name="m1")
+# mat2 = tf.Variable([[0., 1.], [1., 0.]], name="m2")
+# op = tf.matmul(mat1, mat2)
+
+# # the op to init all Variables in parallel
+# init = tf.initialize_all_variables()
+
+# # the op to save n restore all Variables
+# saver = tf.train.Saver()
+
+# with tf.Session() as sess:
+# 	sess.run(init)
+# 	res = sess.run(op)
+# 	print res
+# 	# saving to disk
+# 	save_path = saver.save(sess, os.getcwd()+"/model.ckpt")
+# 	print "Model saved in file: ", save_path
+
+
+
+# # Restoring the model
+# v1 = tf.Variable([[0., 0.]], name="m1")
+# v2 = tf.Variable([[0., 0.], [0., 0.]], name="m2")
+# op2 = tf.matmul(v1, v2)
+
+# init = tf.initialize_all_variables()
+# saver = tf.train.Saver()
+
+# with tf.Session() as sess:
+# 	saver.restore(sess, os.getcwd()+"/model.ckpt")
+# 	print "Model restored."
+# 	print sess.run(op2)
+
