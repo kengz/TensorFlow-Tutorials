@@ -55,6 +55,7 @@ target/
 
 # DataDir
 MNIST_data/
+logs/
 
 # System files
 .DS_Store
